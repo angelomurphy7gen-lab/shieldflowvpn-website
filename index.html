@@ -813,8 +813,11 @@
 
       nav { padding: 0 6%; }
 
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(10,15,30,.97); padding: 20px 6%; gap: 20px; border-bottom: 1px solid var(--border); }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #0a0f1e; padding: 24px 6%; gap: 22px; border-bottom: 1px solid var(--border); box-shadow: 0 8px 32px rgba(0,0,0,.6); }
       .nav-links.open { display: flex; }
+      .nav-links a { color: var(--white); font-size: 1rem; }
+      .nav-links a:hover { color: var(--cyan); }
+      .nav-links .nav-cta { color: var(--bg) !important; }
       .nav-toggle { display: flex; }
 
       .hero-logo { flex-direction: column; gap: 10px; }
