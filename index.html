@@ -15,7 +15,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Reset & Base ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -44,12 +43,10 @@
       overflow-x: hidden;
     }
 
-    /* ─── Scrollbar ────────────────────────────────────────────── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 3px; }
 
-    /* ─── Nav ──────────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -140,10 +137,7 @@
       transition: transform .3s, opacity .3s;
     }
 
-    /* ─── Section base ─────────────────────────────────────────── */
-    section {
-      padding: 100px 5%;
-    }
+    section { padding: 100px 5%; }
 
     .section-label {
       display: inline-block;
@@ -166,9 +160,10 @@
       font-size: 1.05rem;
       color: var(--gray);
       max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    /* ─── HERO ─────────────────────────────────────────────────── */
     #hero {
       min-height: 100vh;
       display: flex;
@@ -181,7 +176,6 @@
       overflow: hidden;
     }
 
-    /* grid lines background */
     #hero::before {
       content: '';
       position: absolute;
@@ -199,7 +193,6 @@
       100% { background-position: 60px 60px, 60px 60px; }
     }
 
-    /* radial glow */
     #hero::after {
       content: '';
       position: absolute;
@@ -253,9 +246,7 @@
       50%       { filter: drop-shadow(0 0 24px rgba(0,212,255,.9)); }
     }
 
-    .hero-brand {
-      text-align: left;
-    }
+    .hero-brand { text-align: left; }
 
     .hero-name {
       display: block;
@@ -353,9 +344,7 @@
       flex-wrap: wrap;
     }
 
-    .stat {
-      text-align: center;
-    }
+    .stat { text-align: center; }
 
     .stat-num {
       display: block;
@@ -373,7 +362,6 @@
       margin-top: 4px;
     }
 
-    /* ─── FEATURES ─────────────────────────────────────────────── */
     #features {
       background: var(--bg2);
       position: relative;
@@ -436,22 +424,27 @@
     }
 
     /* ─── PRICING ──────────────────────────────────────────────── */
-    #pricing {
-      position: relative;
-    }
+    #pricing { position: relative; }
 
     .pricing-header {
       text-align: center;
       margin-bottom: 64px;
     }
 
+    /* FIX 1: centre the subtitle */
+    .pricing-header .section-sub {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* FIX 2: equal height cards */
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 22px;
       max-width: 1060px;
       margin: 0 auto;
-      align-items: start;
+      align-items: stretch;
     }
 
     .pricing-card {
@@ -462,6 +455,8 @@
       transition: transform .2s, border-color .2s, box-shadow .2s;
       backdrop-filter: blur(8px);
       position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
     .pricing-card:hover {
@@ -538,6 +533,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      flex: 1;
     }
 
     .plan-features li {
@@ -561,11 +557,10 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 8px;
+      flex: 1;
     }
 
-    .plan-topup-table tr:not(:last-child) td {
-      padding-bottom: 8px;
-    }
+    .plan-topup-table tr:not(:last-child) td { padding-bottom: 8px; }
 
     .plan-topup-table td {
       font-size: .88rem;
@@ -593,19 +588,14 @@
       opacity: .3;
     }
 
-    .firestick-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
+    .firestick-inner { max-width: 860px; margin: 0 auto; }
 
     .firestick-header {
       text-align: center;
       margin-bottom: 56px;
     }
 
-    .firestick-header .section-sub {
-      margin: 0 auto;
-    }
+    .firestick-header .section-sub { margin: 0 auto; }
 
     .steps {
       display: flex;
@@ -649,8 +639,6 @@
       box-shadow: 0 0 16px rgba(0,212,255,.2);
     }
 
-    .step-body {}
-
     .step-title {
       font-size: 1rem;
       font-weight: 700;
@@ -688,10 +676,81 @@
       color: var(--gray);
     }
 
-    .apk-note-icon {
-      font-size: 1.4rem;
-      flex-shrink: 0;
+    /* ─── MODAL ─────────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--gray);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+
+    .modal-close:hover { color: var(--white); background: rgba(255,255,255,.08); }
+
+    .modal-frame {
+      flex: 1;
+      border: none;
+      width: 100%;
+      min-height: 0;
+    }
+
+    .modal-footer {
+      padding: 12px 24px;
+      border-top: 1px solid var(--border);
+      text-align: right;
+    }
+
+    .modal-open-link {
+      font-size: .8rem;
+      color: var(--gray);
+      text-decoration: none;
+    }
+
+    .modal-open-link:hover { color: var(--cyan); }
 
     /* ─── FOOTER ────────────────────────────────────────────────── */
     footer {
@@ -700,10 +759,7 @@
       padding: 60px 5% 40px;
     }
 
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
 
     .footer-top {
       display: grid;
@@ -735,8 +791,6 @@
       line-height: 1.65;
     }
 
-    .footer-links-group {}
-
     .footer-links-title {
       font-size: .75rem;
       font-weight: 700;
@@ -758,9 +812,27 @@
       text-decoration: none;
       font-size: .9rem;
       transition: color .2s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font);
+      padding: 0;
     }
 
-    .footer-links a:hover { color: var(--cyan); }
+    .footer-links a:hover,
+    .footer-links button:hover { color: var(--cyan); }
+
+    .footer-links button {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .2s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font);
+      padding: 0;
+    }
 
     .footer-divider {
       height: 1px;
@@ -792,7 +864,6 @@
 
     .footer-contact a:hover { color: var(--cyan); }
 
-    /* ─── Scroll reveal ─────────────────────────────────────────── */
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -804,7 +875,6 @@
       transform: translateY(0);
     }
 
-    /* stagger children */
     .reveal-stagger > * {
       opacity: 0;
       transform: translateY(24px);
@@ -818,33 +888,24 @@
     .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:.33s; }
     .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:.40s; }
 
-    /* ─── Responsive ────────────────────────────────────────────── */
     @media (max-width: 768px) {
       section { padding: 80px 6%; }
-
       nav { padding: 0 6%; }
-
       .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #0a0f1e; padding: 24px 6%; gap: 22px; border-bottom: 1px solid var(--border); box-shadow: 0 8px 32px rgba(0,0,0,.6); }
       .nav-links.open { display: flex; }
       .nav-links a { color: var(--white); font-size: 1rem; }
       .nav-links a:hover { color: var(--cyan); }
       .nav-links .nav-cta { color: var(--bg) !important; }
       .nav-toggle { display: flex; }
-
       .hero-logo { flex-direction: column; gap: 10px; }
       .hero-brand { text-align: center; }
       .hero-name { text-align: center; }
       .hero-vpn-badge { margin: 6px auto 0; }
-
       .hero-stats { gap: 24px; }
-
       .features-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
-
       .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
-
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
-
       .steps::before { left: 26px; }
     }
 
@@ -856,6 +917,20 @@
   </style>
 </head>
 <body>
+
+  <!-- ─── MODAL OVERLAY ────────────────────────────────────────── -->
+  <div class="modal-overlay" id="legalModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="modalTitle">Privacy Policy</span>
+        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      </div>
+      <iframe class="modal-frame" id="modalFrame" src="" title="Legal document"></iframe>
+      <div class="modal-footer">
+        <a class="modal-open-link" id="modalOpenLink" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ─── NAV ─────────────────────────────────────────────────── -->
   <nav>
@@ -882,7 +957,6 @@
   <!-- ─── HERO ─────────────────────────────────────────────────── -->
   <section id="hero">
     <div class="hero-content">
-
       <div class="hero-logo">
         <div class="hero-shield">
           <svg viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -935,7 +1009,6 @@
           <span class="stat-label">Encryption</span>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -951,7 +1024,6 @@
     </div>
 
     <div class="features-grid reveal-stagger">
-
       <div class="feature-card">
         <span class="feature-icon">🔒</span>
         <h3 class="feature-title">Zero-Log Policy</h3>
@@ -960,7 +1032,6 @@
           IP addresses, or session data. What you do online is yours alone.
         </p>
       </div>
-
       <div class="feature-card">
         <span class="feature-icon">⚡</span>
         <h3 class="feature-title">WireGuard® Protocol</h3>
@@ -969,7 +1040,6 @@
           secure than legacy VPN protocols like OpenVPN or IPsec.
         </p>
       </div>
-
       <div class="feature-card">
         <span class="feature-icon">🎁</span>
         <h3 class="feature-title">Free 500MB on Signup</h3>
@@ -978,7 +1048,6 @@
           no payment required. Top up anytime or earn more by watching ads.
         </p>
       </div>
-
       <div class="feature-card">
         <span class="feature-icon">🛡️</span>
         <h3 class="feature-title">Military-Grade Encryption</h3>
@@ -987,7 +1056,6 @@
           standard trusted by governments and security agencies worldwide.
         </p>
       </div>
-
       <div class="feature-card">
         <span class="feature-icon">🤖</span>
         <h3 class="feature-title">AI ShieldBot Assistant</h3>
@@ -996,7 +1064,6 @@
           troubleshoot issues, and get the most from your VPN — anytime.
         </p>
       </div>
-
       <div class="feature-card">
         <span class="feature-icon">💰</span>
         <h3 class="feature-title">No Subscription Needed</h3>
@@ -1005,7 +1072,6 @@
           commitments, no surprise charges, and no expiry on paid data.
         </p>
       </div>
-
     </div>
   </section>
 
@@ -1014,8 +1080,7 @@
     <div class="pricing-header reveal">
       <span class="section-label">Pricing</span>
       <h2 class="section-title">Simple, flexible pricing</h2>
-      <p class="section-sub">style="text-align:center; Start free, pay as you go, or go unlimited. There's a plan for everyone.</p>
-      
+      <p class="section-sub">Start free, pay as you go, or go unlimited. There's a plan for everyone.</p>
     </div>
 
     <div class="pricing-grid reveal-stagger">
@@ -1050,24 +1115,13 @@
       <!-- Top Up -->
       <div class="pricing-card">
         <p class="plan-name">Top Up</p>
-        <div class="plan-price">
-          <sup>from</sup>£1
-        </div>
+        <div class="plan-price"><sup>from</sup>£1</div>
         <p class="plan-tagline">Buy data, no expiry</p>
         <div class="plan-divider"></div>
         <table class="plan-topup-table" aria-label="Top up data rates">
-          <tr>
-            <td>£1</td>
-            <td>1 GB data</td>
-          </tr>
-          <tr>
-            <td>£2</td>
-            <td>3 GB data</td>
-          </tr>
-          <tr>
-            <td>£3</td>
-            <td>5 GB data</td>
-          </tr>
+          <tr><td>£1</td><td>1 GB data</td></tr>
+          <tr><td>£2</td><td>3 GB data</td></tr>
+          <tr><td>£3</td><td>5 GB data</td></tr>
         </table>
       </div>
 
@@ -1075,9 +1129,7 @@
       <div class="pricing-card featured">
         <span class="featured-badge">Most Popular</span>
         <p class="plan-name">Premium</p>
-        <div class="plan-price">
-          <sup>£</sup>3.99<sub>/mo</sub>
-        </div>
+        <div class="plan-price"><sup>£</sup>3.99<sub>/mo</sub></div>
         <p class="plan-tagline">Everything, unlimited</p>
         <div class="plan-divider"></div>
         <ul class="plan-features">
@@ -1095,7 +1147,6 @@
   <!-- ─── FIRESTICK ────────────────────────────────────────────── -->
   <section id="firestick">
     <div class="firestick-inner">
-
       <div class="firestick-header reveal">
         <span class="section-label">FireStick</span>
         <h2 class="section-title">Also available on FireStick</h2>
@@ -1104,13 +1155,17 @@
           ShieldFlow VPN on your Amazon FireStick.
         </p>
       </div>
-<div class="step">
-  <div class="step-num">1</div>
-  <div class="step-body">
-    <h3 class="step-title">Unlock Developer Options</h3>
-    <p class="step-desc">On your FireStick go to <strong>Settings → My Fire TV → About</strong> and click on <strong>Fire TV Stick</strong> rapidly <strong>7 times</strong> until you see "You are now a developer". Then go back to <strong>My Fire TV → Developer Options</strong> and turn on <strong>Apps from Unknown Sources</strong>.</p>
-  </div>
-</div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3 class="step-title">Unlock Developer Options</h3>
+            <p class="step-desc">On your FireStick go to <strong>Settings → My Fire TV → About</strong> (or <strong>Device &amp; Software → About</strong> on some models). Select your device name <strong>7 times</strong> until you see a countdown. Press <strong>Back</strong> to find <strong>Developer Options</strong>. Inside Developer Options:<br><br>
+            • If you see <strong>"Apps from Unknown Sources"</strong> → turn it ON<br>
+            • If you see <strong>"Install unknown apps"</strong> → select <strong>Downloader</strong> and turn it ON</p>
+          </div>
+        </div>
 
         <div class="step">
           <div class="step-num">2</div>
@@ -1127,16 +1182,13 @@
           <div class="step-num">3</div>
           <div class="step-body">
             <h3 class="step-title">Enter the APK Download Link</h3>
-            <p class="step-desc">
-              Open Downloader, select the URL field, and enter the ShieldFlow VPN
-              APK download link.
-            </p>
-         <span class="step-code">shieldflowvpn.co.uk/firestick.html</span>
+            <p class="step-desc">Open Downloader, select the URL field, and enter the ShieldFlow VPN APK download link.</p>
+            <span class="step-code">shieldflowvpn.co.uk/firestick.html</span>
             <br><br>
-<p style="color:rgba(0,229,255,0.7);font-size:13px;">Or enter this short code in Downloader:</p>
-<span class="step-code" style="font-size:28px;letter-spacing:4px;">4131307</span>
-<br><br>
-<a href="https://github.com/angelomurphy7gen-lab/shieldflowvpn-website/releases/download/v2.0/app-release.apk" style="display:inline-block;margin-top:10px;padding:12px 28px;background:linear-gradient(135deg,#00bcd4,#00e5ff);color:#070b14;font-weight:800;border-radius:12px;text-decoration:none;letter-spacing:1px;font-size:13px;">⬇ DOWNLOAD APK</a>
+            <p style="color:rgba(0,212,255,0.7);font-size:13px;">Or enter this short code in Downloader:</p>
+            <span class="step-code" style="font-size:28px;letter-spacing:4px;">4131307</span>
+            <br><br>
+            <a href="https://github.com/angelomurphy7gen-lab/shieldflowvpn-website/releases/download/v2.0/app-release.apk" style="display:inline-block;margin-top:10px;padding:12px 28px;background:linear-gradient(135deg,#00bcd4,#00e5ff);color:#070b14;font-weight:800;border-radius:12px;text-decoration:none;letter-spacing:1px;font-size:13px;">⬇ DOWNLOAD APK</a>
           </div>
         </div>
 
@@ -1146,20 +1198,17 @@
             <h3 class="step-title">Install &amp; Enjoy</h3>
             <p class="step-desc">
               Follow the on-screen prompts to install ShieldFlow VPN.
-              Launch it, sign in or continue as guest, and connect instantly.
+              Launch it, sign in and connect instantly.
             </p>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <!-- ─── FOOTER ───────────────────────────────────────────────── -->
   <footer>
     <div class="footer-inner">
-
       <div class="footer-top">
         <div>
           <div class="footer-brand-logo">
@@ -1176,12 +1225,10 @@
           <p class="footer-links-title">Legal &amp; Support</p>
           <ul class="footer-links">
             <li>
-              <a href="https://angelomurphy7gen-lab.github.io/shieldflowvpn-legal/privacy-policy.html"
-                 target="_blank" rel="noopener">Privacy Policy</a>
+              <button onclick="openModal('Privacy Policy','https://angelomurphy7gen-lab.github.io/shieldflowvpn-legal/privacy-policy.html')">Privacy Policy</button>
             </li>
             <li>
-              <a href="https://angelomurphy7gen-lab.github.io/shieldflowvpn-legal/terms-of-service.html"
-                 target="_blank" rel="noopener">Terms of Service</a>
+              <button onclick="openModal('Terms of Service','https://angelomurphy7gen-lab.github.io/shieldflowvpn-legal/terms-of-service.html')">Terms of Service</button>
             </li>
             <li>
               <a href="mailto:shieldflowvpn@gmail.com">Contact Us</a>
@@ -1201,7 +1248,6 @@
           <a href="mailto:shieldflowvpn@gmail.com">shieldflowvpn@gmail.com</a>
         </div>
       </div>
-
     </div>
   </footer>
 
@@ -1215,7 +1261,6 @@
       navToggle.setAttribute('aria-expanded', open);
     });
 
-    // Close menu on nav link click
     navLinks.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -1242,7 +1287,39 @@
       document.querySelector('nav').style.boxShadow =
         window.scrollY > 10 ? '0 4px 30px rgba(0,0,0,.4)' : '';
     }, { passive: true });
+
+    // ─── Legal modal ────────────────────────────────────────────
+    const modal      = document.getElementById('legalModal');
+    const modalFrame = document.getElementById('modalFrame');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalLink  = document.getElementById('modalOpenLink');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(title, url) {
+      modalTitle.textContent = title;
+      modalFrame.src = url;
+      modalLink.href = url;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modalFrame.src = '';
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
   </script>
 
 </body>
 </html>
+
