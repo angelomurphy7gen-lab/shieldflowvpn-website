@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ShieldFlow VPN - Free VPN app for Android. Military-grade WireGuard encryption, zero logs, 500MB free on signup. Download on Google Play.">
+  <meta name="keywords" content="VPN, free VPN, Android VPN, WireGuard VPN, ShieldFlow, privacy, encryption">
+  <meta name="author" content="ShieldFlow VPN">
+  <meta property="og:title" content="ShieldFlow VPN - Encrypt Your World">
+  <meta property="og:description" content="Free VPN app for Android. Military-grade WireGuard encryption, zero logs, 500MB free on signup.">
+  <meta property="og:url" content="https://shieldflowvpn.co.uk">
+  <meta name="twitter:card" content="summary">
+  <title>ShieldFlow VPN — Encrypt Your World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0f1e;
+      --bg2:      #0d1428;
+      --bg3:      #111827;
+      --cyan:     #00d4ff;
+      --cyan-dim: #00a8cc;
+      --cyan-glow:#00d4ff33;
+      --white:    #ffffff;
+      --gray:     #8b9ab4;
+      --border:   rgba(0,212,255,.18);
+      --card-bg:  rgba(13,20,40,.7);
+      --radius:   14px;
+      --shadow:   0 8px 40px rgba(0,0,0,.5);
+      --font:     'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 3px; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(10,15,30,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      color: var(--white);
+    }
+
+    .nav-logo-text span { color: var(--cyan); }
+
+    .nav-badge {
+      font-size: .55rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      background: var(--cyan);
+      color: var(--bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--cyan); }
+
+    .nav-cta {
+      background: var(--cyan);
+      color: var(--bg) !important;
+      font-weight: 700 !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: opacity .2s, transform .15s !important;
+    }
+
+    .nav-cta:hover { opacity: .88; transform: translateY(-1px); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: transparent;
+      border: none;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+
+    section { padding: 100px 5%; }
+
+    .section-label {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    h2.section-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 120px;
+      padding-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridPan 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gridPan {
+      0%   { background-position: 0 0, 0 0; }
+      100% { background-position: 60px 60px, 60px 60px; }
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,.1) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: .6; transform: translate(-50%,-50%) scale(1); }
+      50%       { opacity: 1;  transform: translate(-50%,-50%) scale(1.08); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      animation: fadeUp .9s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .hero-shield {
+      width: 72px; height: 72px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .hero-shield svg {
+      width: 100%; height: 100%;
+      filter: drop-shadow(0 0 16px rgba(0,212,255,.6));
+      animation: shieldPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes shieldPulse {
+      0%, 100% { filter: drop-shadow(0 0 12px rgba(0,212,255,.5)); }
+      50%       { filter: drop-shadow(0 0 24px rgba(0,212,255,.9)); }
+    }
+
+    .hero-brand { text-align: left; }
+
+    .hero-name {
+      display: block;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: .04em;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .hero-name .flow { color: var(--cyan); }
+
+    .hero-vpn-badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      background: var(--cyan);
+      color: var(--bg);
+      padding: 3px 10px;
+      border-radius: 5px;
+      margin-top: 4px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 300;
+      letter-spacing: .04em;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .hero-tagline strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .2s, opacity .2s;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: 0 0 24px rgba(0,212,255,.4);
+    }
+
+    .btn-primary:hover { box-shadow: 0 0 36px rgba(0,212,255,.65); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cyan);
+      border: 1.5px solid var(--cyan);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0,212,255,.08);
+      box-shadow: 0 0 20px rgba(0,212,255,.2);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 64px;
+      flex-wrap: wrap;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-num {
+      display: block;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: .8rem;
+      color: var(--gray);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    #features {
+      background: var(--bg2);
+      position: relative;
+    }
+
+    #features::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: .3;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      backdrop-filter: blur(8px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,212,255,.5);
+      box-shadow: 0 12px 40px rgba(0,212,255,.1);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+      line-height: 1;
+    }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: .875rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── PRICING ──────────────────────────────────────────────── */
+    #pricing { position: relative; }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    /* FIX 1: centre the subtitle */
+    .pricing-header .section-sub {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* FIX 2: equal height cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      max-width: 1060px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      backdrop-filter: blur(8px);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,212,255,.45);
+      box-shadow: 0 12px 40px rgba(0,212,255,.1);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--cyan);
+      background: linear-gradient(145deg, rgba(0,212,255,.06), rgba(13,20,40,.9));
+      box-shadow: 0 0 40px rgba(0,212,255,.15);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -13px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--cyan);
+      color: var(--bg);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .plan-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 8px;
+    }
+
+    .plan-price {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .plan-price sup {
+      font-size: 1.1rem;
+      font-weight: 600;
+      vertical-align: top;
+      margin-top: 8px;
+      display: inline-block;
+    }
+
+    .plan-price sub {
+      font-size: .9rem;
+      font-weight: 400;
+      color: var(--gray);
+    }
+
+    .plan-tagline {
+      font-size: .85rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .plan-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .88rem;
+      color: var(--gray);
+      line-height: 1.45;
+    }
+
+    .plan-features li::before {
+      content: '✓';
+      color: var(--cyan);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .plan-topup-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      flex: 1;
+    }
+
+    .plan-topup-table tr:not(:last-child) td { padding-bottom: 8px; }
+
+    .plan-topup-table td {
+      font-size: .88rem;
+      color: var(--gray);
+    }
+
+    .plan-topup-table td:last-child {
+      text-align: right;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* ─── FIRESTICK ─────────────────────────────────────────────── */
+    #firestick {
+      background: var(--bg2);
+      position: relative;
+    }
+
+    #firestick::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: .3;
+    }
+
+    .firestick-inner { max-width: 860px; margin: 0 auto; }
+
+    .firestick-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .firestick-header .section-sub { margin: 0 auto; }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--cyan), transparent);
+      opacity: .3;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 28px 0;
+      position: relative;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--cyan);
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 16px rgba(0,212,255,.2);
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-size: .9rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .step-code {
+      display: inline-block;
+      background: rgba(0,212,255,.08);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-family: 'Courier New', monospace;
+      font-size: .85rem;
+      color: var(--cyan);
+      margin-top: 8px;
+    }
+
+    .apk-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0,212,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-top: 36px;
+      font-size: .9rem;
+      color: var(--gray);
+    }
+
+    /* ─── MODAL ─────────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--gray);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+
+    .modal-close:hover { color: var(--white); background: rgba(255,255,255,.08); }
+
+    .modal-frame {
+      flex: 1;
+      border: none;
+      width: 100%;
+      min-height: 0;
+    }
+
+    .modal-footer {
+      padding: 12px 24px;
+      border-top: 1px solid var(--border);
+      text-align: right;
+    }
+
+    .modal-open-link {
+      font-size: .8rem;
+      color: var(--gray);
+      text-decoration: none;
+    }
+
+    .modal-open-link:hover { color: var(--cyan); }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+      padding: 60px 5% 40px;
+    }
+
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand-logo .brand-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+    }
+
+    .footer-brand-logo .brand-text span { color: var(--cyan); }
+
+    .footer-desc {
+      font-size: .875rem;
+      color: var(--gray);
+      max-width: 320px;
+      line-height: 1.65;
+    }
+
+    .footer-links-title {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .2s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font);
+      padding: 0;
+    }
+
+    .footer-links a:hover,
+    .footer-links button:hover { color: var(--cyan); }
+
+    .footer-links button {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .2s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font);
+      padding: 0;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: .825rem;
+      color: var(--gray);
+    }
+
+    .footer-copy span { color: var(--cyan); }
+
+    .footer-contact a {
+      font-size: .825rem;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-contact a:hover { color: var(--cyan); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:.05s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.12s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.19s; }
+    .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.26s; }
+    .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:.33s; }
+    .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:.40s; }
+
+    @media (max-width: 768px) {
+      section { padding: 80px 6%; }
+      nav { padding: 0 6%; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #0a0f1e; padding: 24px 6%; gap: 22px; border-bottom: 1px solid var(--border); box-shadow: 0 8px 32px rgba(0,0,0,.6); }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: var(--white); font-size: 1rem; }
+      .nav-links a:hover { color: var(--cyan); }
+      .nav-links .nav-cta { color: var(--bg) !important; }
+      .nav-toggle { display: flex; }
+      .hero-logo { flex-direction: column; gap: 10px; }
+      .hero-brand { text-align: center; }
+      .hero-name { text-align: center; }
+      .hero-vpn-badge { margin: 6px auto 0; }
+      .hero-stats { gap: 24px; }
+      .features-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .steps::before { left: 26px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name { font-size: 2rem; }
+      h2.section-title { font-size: 1.65rem; }
+      .btn { padding: 12px 20px; font-size: .88rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── MODAL OVERLAY ────────────────────────────────────────── -->
+  <div class="modal-overlay" id="legalModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="modalTitle">Privacy Policy</span>
+        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      </div>
+      <iframe class="modal-frame" id="modalFrame" src="" title="Legal document"></iframe>
+      <div class="modal-footer">
+        <a class="modal-open-link" id="modalOpenLink" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────── -->
+  <nav>
+    <a href="#hero" class="nav-logo" aria-label="ShieldFlow VPN home">
+      <span class="nav-logo-text">SHIELD<span>FLOW</span></span>
+      <span class="nav-badge">VPN</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#firestick">FireStick</a></li>
+      <li>
+        <a href="https://play.google.com/store/apps/details?id=com.shieldflowvpn.app"
+           target="_blank" rel="noopener" class="nav-cta">
+          Get the App
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <div class="hero-shield">
+          <svg viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M40 4L8 18V42C8 61 22 77 40 84C58 77 72 61 72 42V18L40 4Z"
+                  fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M40 14L16 25V42C16 57 26 70 40 76C54 70 64 57 64 42V25L40 14Z"
+                  fill="rgba(0,212,255,0.08)" stroke="#00d4ff" stroke-width="1.5" stroke-linejoin="round" opacity="0.6"/>
+            <path d="M28 44L36 52L54 35" stroke="#00d4ff" stroke-width="3.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="hero-brand">
+          <span class="hero-name">SHIELD<span class="flow">FLOW</span></span>
+          <span class="hero-vpn-badge">VPN</span>
+        </div>
+      </div>
+
+      <p class="hero-tagline"><strong>Encrypt Your World</strong></p>
+      <p class="hero-desc">
+        Military-grade privacy, WireGuard® speed, and zero-log commitment —
+        free to start, no credit card needed.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://play.google.com/store/apps/details?id=com.shieldflowvpn.app"
+           target="_blank" rel="noopener" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3.18 23.76c.33.19.7.24 1.06.16l12.04-12.04-3.52-3.52L3.18 23.76zM20.7 9.56l-2.62-1.48-3.92 3.92 3.92 3.92 2.64-1.48c.75-.43.75-1.47-.02-1.9l.02-.98zm-18.3-8.3l11.6 11.6L3.22.3c-.37-.07-.74-.01-1.06.16C1.4.89 1.38 1.85 2.4 2.4v-.73l-.02-.41zm9.32 10.76L8.2.3C7.18.08 6.1.65 6.1 1.74v20.52c0 1.1 1.1 1.67 2.1 1.45l8.1-8.1-4.58-2.58z"/>
+          </svg>
+          Download on Google Play
+        </a>
+        <a href="#features" class="btn btn-outline">Learn More</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">500MB</span>
+          <span class="stat-label">Free on signup</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">Logs kept</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">WG®</span>
+          <span class="stat-label">Protocol</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">256-bit</span>
+          <span class="stat-label">Encryption</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES ────────────────────────────────────────────── -->
+  <section id="features">
+    <div class="features-header reveal">
+      <span class="section-label">Built Different</span>
+      <h2 class="section-title">Why ShieldFlow?</h2>
+      <p class="section-sub">
+        Privacy shouldn't be complicated or expensive. ShieldFlow delivers
+        enterprise-level security for everyone.
+      </p>
+    </div>
+
+    <div class="features-grid reveal-stagger">
+      <div class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3 class="feature-title">Zero-Log Policy</h3>
+        <p class="feature-desc">
+          We never collect, store, or share your browsing activity, connection logs,
+          IP addresses, or session data. What you do online is yours alone.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3 class="feature-title">WireGuard® Protocol</h3>
+        <p class="feature-desc">
+          Built on the modern WireGuard® protocol — faster, leaner, and more
+          secure than legacy VPN protocols like OpenVPN or IPsec.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎁</span>
+        <h3 class="feature-title">Free 500MB on Signup</h3>
+        <p class="feature-desc">
+          Create a free account and get 500MB of VPN data immediately,
+          no payment required. Top up anytime or earn more by watching ads.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <h3 class="feature-title">Military-Grade Encryption</h3>
+        <p class="feature-desc">
+          AES-256 encryption shields every byte of your traffic, the same
+          standard trusted by governments and security agencies worldwide.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🤖</span>
+        <h3 class="feature-title">AI ShieldBot Assistant</h3>
+        <p class="feature-desc">
+          Our built-in AI assistant helps you optimise your connection,
+          troubleshoot issues, and get the most from your VPN — anytime.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💰</span>
+        <h3 class="feature-title">No Subscription Needed</h3>
+        <p class="feature-desc">
+          Pay only for what you use. Top up data as you go — no monthly
+          commitments, no surprise charges, and no expiry on paid data.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRICING ──────────────────────────────────────────────── -->
+  <section id="pricing">
+    <div class="pricing-header reveal">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">Simple, flexible pricing</h2>
+      <p class="section-sub">Start free, pay as you go, or go unlimited. There's a plan for everyone.</p>
+    </div>
+
+    <div class="pricing-grid reveal-stagger">
+
+      <!-- Guest -->
+      <div class="pricing-card">
+        <p class="plan-name">Guest</p>
+        <div class="plan-price">Free</div>
+        <p class="plan-tagline">No account needed</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Watch ads to earn data</li>
+          <li>Basic server access</li>
+          <li>No signup required</li>
+        </ul>
+      </div>
+
+      <!-- Free Account -->
+      <div class="pricing-card">
+        <p class="plan-name">Free Account</p>
+        <div class="plan-price">Free</div>
+        <p class="plan-tagline">Sign up to unlock more</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>500MB data on signup</li>
+          <li>Watch ads to earn more data</li>
+          <li>All basic servers</li>
+          <li>AI ShieldBot assistant</li>
+        </ul>
+      </div>
+
+      <!-- Top Up -->
+      <div class="pricing-card">
+        <p class="plan-name">Top Up</p>
+        <div class="plan-price"><sup>from</sup>£1</div>
+        <p class="plan-tagline">Buy data, no expiry</p>
+        <div class="plan-divider"></div>
+        <table class="plan-topup-table" aria-label="Top up data rates">
+          <tr><td>£1</td><td>1 GB data</td></tr>
+          <tr><td>£2</td><td>3 GB data</td></tr>
+          <tr><td>£3</td><td>5 GB data</td></tr>
+        </table>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card featured">
+        <span class="featured-badge">Most Popular</span>
+        <p class="plan-name">Premium</p>
+        <div class="plan-price"><sup>£</sup>3.99<sub>/mo</sub></div>
+        <p class="plan-tagline">Everything, unlimited</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Unlimited data</li>
+          <li>All premium servers</li>
+          <li>Ad-free experience</li>
+          <li>Priority connection speeds</li>
+          <li>AI ShieldBot — full access</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── FIRESTICK ────────────────────────────────────────────── -->
+  <section id="firestick">
+    <div class="firestick-inner">
+      <div class="firestick-header reveal">
+        <span class="section-label">FireStick</span>
+        <h2 class="section-title">Also available on FireStick</h2>
+        <p class="section-sub">
+          Secure your TV streaming in minutes. Follow these steps to sideload
+          ShieldFlow VPN on your Amazon FireStick.
+        </p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3 class="step-title">Unlock Developer Options</h3>
+            <p class="step-desc">On your FireStick go to <strong>Settings → My Fire TV → About</strong> (or <strong>Device &amp; Software → About</strong> on some models). Select your device name <strong>7 times</strong> until you see a countdown. Press <strong>Back</strong> to find <strong>Developer Options</strong>. Inside Developer Options:<br><br>
+            • If you see <strong>"Apps from Unknown Sources"</strong> → turn it ON<br>
+            • If you see <strong>"Install unknown apps"</strong> → select <strong>Downloader</strong> and turn it ON</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3 class="step-title">Download the Downloader App</h3>
+            <p class="step-desc">
+              Search for and install the <strong>Downloader</strong> app from the
+              Amazon Appstore — it's free and lets you sideload APK files.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3 class="step-title">Enter the APK Download Link</h3>
+            <p class="step-desc">Open Downloader, select the URL field, and enter the ShieldFlow VPN APK download link.</p>
+            <span class="step-code">shieldflowvpn.co.uk/firestick.html</span>
+            <br><br>
+            <p style="color:rgba(0,212,255,0.7);font-size:13px;">Or enter this short code in Downloader:</p>
+            <span class="step-code" style="font-size:28px;letter-spacing:4px;">4131307</span>
+            <br><br>
+            <a href="https://github.com/angelomurphy7gen-lab/shieldflowvpn-website/releases/download/v2.0/app-release.apk" style="display:inline-block;margin-top:10px;padding:12px 28px;background:linear-gradient(135deg,#00bcd4,#00e5ff);color:#070b14;font-weight:800;border-radius:12px;text-decoration:none;letter-spacing:1px;font-size:13px;">⬇ DOWNLOAD APK</a>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h3 class="step-title">Install &amp; Enjoy</h3>
+            <p class="step-desc">
+              Follow the on-screen prompts to install ShieldFlow VPN.
+              Launch it, sign in and connect instantly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-logo">
+            <span class="brand-text">SHIELD<span>FLOW</span></span>
+            <span class="nav-badge">VPN</span>
+          </div>
+          <p class="footer-desc">
+            Encrypt Your World. Professional-grade VPN protection
+            built for everyone — free to start, no compromise on privacy.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <p class="footer-links-title">Legal &amp; Support</p>
+          <ul class="footer-links">
+            <li>
+              <button onclick="openModal('Privacy Policy','https://angelomurphy7gen-lab.github.io/shieldflowvpn-legal/privacy-policy.html')">Privacy Policy</button>
+            </li>
+            <li>
+              <button onclick="openModal('Terms of Service','https://angelomurphy7gen-lab.github.io/shieldflowvpn-legal/terms-of-service.html')">Terms of Service</button>
+            </li>
+            <li>
+              <a href="mailto:shieldflowvpn@gmail.com">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2026 <span>ShieldFlow VPN</span>. All rights reserved.
+          WireGuard® is a registered trademark of Jason A. Donenfeld.
+        </p>
+        <div class="footer-contact">
+          <a href="mailto:shieldflowvpn@gmail.com">shieldflowvpn@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Mobile nav toggle ──────────────────────────────────────
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ─── Scroll reveal ──────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ─── Nav shadow on scroll ───────────────────────────────────
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow =
+        window.scrollY > 10 ? '0 4px 30px rgba(0,0,0,.4)' : '';
+    }, { passive: true });
+
+    // ─── Legal modal ────────────────────────────────────────────
+    const modal      = document.getElementById('legalModal');
+    const modalFrame = document.getElementById('modalFrame');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalLink  = document.getElementById('modalOpenLink');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(title, url) {
+      modalTitle.textContent = title;
+      modalFrame.src = url;
+      modalLink.href = url;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modalFrame.src = '';
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+
+</body>
+</html>
